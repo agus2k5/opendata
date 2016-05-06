@@ -15,10 +15,10 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-<div>
+<!--<div>
 <button id="botonlogin" onclick="Login()" >Logearse con Facebook</button>
 <button id="botonlogin" onclick="Logout()" >Cerrar sesion</button>
-</div>
+</div>-->
 
 
 
