@@ -37,7 +37,8 @@
         <style type="text/css">nav ul a, nav .brand-logo {color: #FFFFFF;}</style>
     <nav class="indigo" role="navigation">
         <div class="nav-wrapper">
-            <a href="${base_url}"><img id="logo-container" class="brand-logo" style="height: 64px;" src=""></img>Logo</a>
+            <spring:url value="/resources/img/hackathon-logo.svg" var="logo" />
+            <a href="${base_url}"><img id="logo-container" class="brand-logo" style="height: 64px;" src="${logo}"></img></a>
             <ul class="right hide-on-med-and-down">
                 <li><a class="white-text ${typography}" href="">1</a></li>
                 <li><a class="white-text ${typography}" href="">2</a></li>

@@ -5,6 +5,7 @@
  */
 package com.z.services.dao;
 
+import com.z.models.Curso;
 import com.z.models.Establecimientos;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
 public interface EstablecimientosDAO {
     public void add(Establecimientos establecimiento);
     public List<Establecimientos> list();
-    public Establecimientos get(String id);
+    public Establecimientos get(int cueanexo);
     public List<Establecimientos> listByRegimen(String regimen);
+    public List<Curso> getCursosByCueAnexo(int cueanexo);
 }

@@ -1,8 +1,12 @@
 package com.z.models;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
 @Table(name="establecimientos")
@@ -31,14 +35,26 @@ public class Establecimientos implements Serializable {
 
 	@Column(name="Jurisdiccion",length =100,nullable = true)
 	private String Jurisdiccion;
+        
+        @JsonIgnore
+        @OneToMany(mappedBy="establecimiento",fetch = FetchType.LAZY)
+        private List<Curso> cursos;
 
 	public Establecimientos(){}
-	
-	/******accessors*******/
+
         
-	public void setNombre(String Nombre){
-		this.Nombre=Nombre;
+	public List<Curso> getCursos(){
+        return cursos;
 	}
+
+    /******accessors*******/
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
+    }
+
+    public void setNombre(String Nombre) {
+        this.Nombre=Nombre;
+    }
 	public String getNombre(){
 		return this.Nombre;
 	}

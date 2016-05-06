@@ -5,9 +5,10 @@
  */
 package com.z.services.dao.impl;
 
+import com.z.models.Curso;
 import com.z.models.Establecimientos;
 import com.z.services.dao.EstablecimientosDAO;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -20,10 +21,11 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Mariano
  */
 @Service
-public class EstablecimientosDAOService implements EstablecimientosDAO{
+public class EstablecimientosDAOService implements EstablecimientosDAO {
+
     @Autowired
     private SessionFactory sessionFactory;
-    
+
     @Override
     @Transactional(readOnly = false)
     public void add(Establecimientos establecimiento) {
@@ -37,8 +39,9 @@ public class EstablecimientosDAOService implements EstablecimientosDAO{
     }
 
     @Override
-    public Establecimientos get(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Transactional(readOnly = true)
+    public Establecimientos get(int cueAnexo) {
+        return (Establecimientos)sessionFactory.getCurrentSession().get(Establecimientos.class, cueAnexo);
     }
 
     @Override
@@ -49,4 +52,16 @@ public class EstablecimientosDAOService implements EstablecimientosDAO{
         query.setParameter("regimen", regimen);
         return query.list();
     }
+    
+    
+    @Override
+    @Transactional(readOnly = true)
+    public List<Curso> getCursosByCueAnexo(int cueanexo) {
+        Query query = sessionFactory.getCurrentSession().createSQLQuery(
+                "select ec.* from establecimiento_cursos ec where CUEANEXO=:cueanexo")
+                .addEntity(Curso.class)
+                .setParameter("cueanexo", cueanexo);
+        return query.list();
+    }
+    
 }
