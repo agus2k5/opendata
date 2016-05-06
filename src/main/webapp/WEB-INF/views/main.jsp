@@ -19,7 +19,7 @@
     });
     function submitChange() {
         distanciaKM = $("#radio_search").val();
-        regimen =$( "#regimen option:selected" ).text();
+        regimen = $("#regimen option:selected").text();
         deleteAllMarksAndCircle();
         getLocationAndLoadMarks();
     }
@@ -36,6 +36,14 @@
             </select>
             <label>Regimen</label>
         </div>
+        <div  class="input-field col s3">
+            <input class="input-field"id="address" type="text" value="Catamarca 653, Corrientes Capital">
+            <label for="address">Dirección</label>
+        </div>
+        <div  class="input-field col s3">
+            <button class="btn waves-effect waves-light indigo" id="submit">Submit<i class="material-icons right">send</i></button>
+        </div>
+        
     </div>
     <div class="col s6">
         <div class="col s3" style="position: absolute;top: 160px;margin-left: 30px;z-index:5;">

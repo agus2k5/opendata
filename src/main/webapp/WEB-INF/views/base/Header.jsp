@@ -39,6 +39,7 @@
         <div class="nav-wrapper">
             <spring:url value="/resources/img/hackathon-logo.svg" var="logo" />
             <a href="${base_url}"><img id="logo-container" class="brand-logo" style="height: 64px;" src="${logo}"></img></a>
+            <!--
             <ul class="right hide-on-med-and-down">
                 <li><a class="white-text ${typography}" href="">1</a></li>
                 <li><a class="white-text ${typography}" href="">2</a></li>
@@ -51,7 +52,7 @@
                 <li><a class="white-text ${typography}" href="">3</a></li>
                 <li><a class="white-text ${typography}" href="">4</a></li>
             </ul>
-            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>-->
         </div>
     </nav>
 </head>

@@ -1,7 +1,8 @@
 var pos = {lat: -27.477900, lng: -58.819607};//centro de corrientes
 var lugar = new google.maps.LatLng(pos.lat, pos.lng);
-var map, marker, circle;
+var map, marker, circle, geocoder;
 var markers = [];
+var flag_submit = false;
 function initialize() {
     var mapProp = {
         center: lugar,
@@ -13,6 +14,7 @@ function initialize() {
         }
     };//propiedades
     map = new google.maps.Map(document.getElementById("googleMap"), mapProp);//mapa
+    geocoder = new google.maps.Geocoder();
 }
 function addLocation(location) {
     var pinIcon = new google.maps.MarkerImage(img_url + 'Person.png', null, null, null, new google.maps.Size(60, 60));
@@ -40,20 +42,26 @@ function drawCircle(center_marker) {
     circle.bindTo('center', center_marker, 'position');
     //console.log(circle.getBounds().toJSON());
 }
-function loadMarks(pos) {
+function loadMarks(pos, flag) {
     var marker, infowindow, content, pinIcon, localidad, departamento;//variables a utilizar
     //petición de json con los establecimientos, base_url e img_url provienen de main.jsp
     if (distanciaKM <= 0 || distanciaKM == null) {
         distanciaKM = 1;
     }
     $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + pos.lat + "," + pos.lng, function (data) {
-        //var json = JSON.stringify(data);
-        localidad = data.results[0].address_components[2].long_name;
-        departamento = data.results[0].address_components[3].long_name;
+        /*var test = data.results[0].formatted_address.split(',');
+        alert(test[1]+" "+test[2]);
+        if (flag) {
+            localidad = data.results[0].address_components[3].long_name;
+            departamento = data.results[0].address_components[4].long_name;
+        } else {*/
+            localidad = data.results[0].address_components[2].long_name;
+            departamento = data.results[0].address_components[3].long_name;
+        //}
         //alert(data.results[0].address_components[2].long_name +'-'+data.results[0].address_components[3].long_name);
         //$.get(base_url + "/establecimientos/getby", {lat: pos.lat, lng: pos.lng, distanciaKM: distanciaKM,regimen:regimen}, function (data) {
-    //establecimientos/getByLocDep/{localidad}/{departamento}/{lat}/{lng}/{distanciaKM}/{regimen}
-        $.get(base_url + "/establecimientos/getByLocDep/" + localidad + "/" + departamento + "/" + pos.lat + "/" + pos.lng + "/" + distanciaKM+"/"+regimen, {}, function (data) {
+        //establecimientos/getByLocDep/{localidad}/{departamento}/{lat}/{lng}/{distanciaKM}/{regimen}
+        $.get(base_url + "/establecimientos/getByLocDep/" + localidad + "/" + departamento + "/" + pos.lat + "/" + pos.lng + "/" + distanciaKM + "/" + regimen, {}, function (data) {
             //foreach obj"i" in json
             $.each(data, function (i) {
                 //pinIcon = new google.maps.MarkerImage(img_url + data[i].categoria.descripcion + '.png', null, null, null, new google.maps.Size(60, 60));
@@ -67,7 +75,8 @@ function loadMarks(pos) {
                        <p>Departamento: " + data[i].departamento + "</p>\n\
                        <p>Localidad: " + data[i].localidad + "</p>\n\
                        <p>Jurisdicción: " + data[i].jurisdiccion + "</p>\n\
-                       <p>Cursos:"+data[i].cursos+"</p>";
+                       <p>Cursos:" + data[i].cursos + "</p>\n\
+                       <a target="+"_blank"+" href=http://localhost:8080/openData/establecimientos/comentatios/" + data[i].cueAnexo + "> Comentar </a>";
                 //texto al hacer clic
                 infowindow = new google.maps.InfoWindow({content: content});//insertar texto
                 //evento on click mostrar contenido de marca "para cada marca"
@@ -90,24 +99,42 @@ function deleteAllMarksAndCircle() {
 function success(position) {
     pos = {lat: position.coords.latitude, lng: position.coords.longitude};
     addLocation(pos);
-    loadMarks(pos);
+    loadMarks(pos, false);
 }
 function error() {
     console.log("Unable to retrieve your location");
     addLocation(pos);
-    loadMarks(pos);
+    loadMarks(pos, false);
 }
 function getLocationAndLoadMarks() {
-    if ("geolocation" in navigator) {
-        //solicitar coordenada
-        navigator.geolocation.getCurrentPosition(success, error);
-    } else {
+    if (flag_submit) {
         addLocation(pos);
-        loadMarks(pos);
+        loadMarks(pos, true);
+    } else {
+        if ("geolocation" in navigator) {
+            //solicitar coordenada
+            navigator.geolocation.getCurrentPosition(success, error);
+        } else {
+            addLocation(pos);
+            loadMarks(pos, false);
+        }
     }
 }
 
 $(function () {
     initialize();//inicializar mapa
     getLocationAndLoadMarks();
+    $("#submit").click(function () {
+        var addr = $("#address").val();
+        $.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + addr, function (data) {
+            var lat = data.results[0].geometry.location.lat;
+            var long = data.results[0].geometry.location.lng;
+            pos = {lat: lat, lng: long};
+            flag_submit = true;
+            //alert(JSON.stringify(pos));
+            deleteAllMarksAndCircle();
+            addLocation(pos);
+            loadMarks(pos, true);
+        });
+    });
 });

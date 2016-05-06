@@ -25,19 +25,19 @@
             <div class="col l6 s12">
                 <h5 class="white-text ${typography}">
                     </h5>
-                    <p class="grey-text text-lighten-4 ${typography}">asd</p>
+                    <p class="grey-text text-lighten-4 ${typography}"></p>
                 </div>
                 <div class="col l3 s12">
-                    <h5 class="white-text ${typography}">qwe</h5>
+                    <h5 class="white-text ${typography}"></h5>
                 <ul>
-                    <li><a class="white-text ${typography}" href="#!">zxc</a></li>
+                    <li><a class="white-text ${typography}" href="#!"></a></li>
                         </br>
-                        <li><a class="btn btn-social-icon btn-facebook indigo light-2" target="_blank" href=""><i class="fa fa-facebook"></i></a></li>
+                        
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="footer-copyright" style="height: 40px;"><p class="brown-text text-lighten-5 right-align ${typography}" style="margin-right: 1%;">© 2015 Mariano Z</p></div>
+        <div class="footer-copyright" style="height: 40px;"><p class="brown-text text-lighten-5 right-align ${typography}" style="margin-right: 1%;">© 2016 Ledesma, Lopez, Meza, Nuñez, Silva</p></div>
 </footer>
 </html>
 <style>
