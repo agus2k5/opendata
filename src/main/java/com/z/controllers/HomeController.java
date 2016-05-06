@@ -47,9 +47,14 @@ public class HomeController {
     public @ResponseBody List<Establecimientos> getEstablecimientos(
             @RequestParam (value="lat",required = true) final String lat,
             @RequestParam (value="lng",required = true) final String lng,
-            @RequestParam (value="distanciaKM",required = true) final double distanciaKM){
+            @RequestParam (value="distanciaKM",required = true) final double distanciaKM,
+            @RequestParam (value="regimen",required = true) final String regimen){
         System.out.println("lat: "+lat+", lng: "+lng);
         Criteria criteria = new CriteriaDistance(Float.parseFloat(lat), Float.parseFloat(lng), distanciaKM);
-        return criteria.meetCriteria(establecimientosDAO.list());
+        if(regimen.equals("Todos")){
+            return criteria.meetCriteria(establecimientosDAO.list());
+        }else{
+            return criteria.meetCriteria(establecimientosDAO.listByRegimen(regimen));
+        }
     }
 }

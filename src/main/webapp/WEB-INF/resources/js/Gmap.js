@@ -36,13 +36,13 @@ function drawCircle(center_marker) {
         fillColor: '#AA0000'
     });
     circle.bindTo('center', center_marker, 'position');
-    console.log(circle.getBounds().toJSON());
+    //console.log(circle.getBounds().toJSON());
 }
 function loadMarks(pos) {
     var marker, infowindow, content, pinIcon;//variables a utilizar
     //petición de json con los establecimientos, base_url e img_url provienen de main.jsp
     if(distanciaKM <= 0 || distanciaKM == null){distanciaKM=1;}
-    $.get(base_url + "/establecimientos/getby", {lat: pos.lat, lng: pos.lng, distanciaKM: distanciaKM}, function (data) {
+    $.get(base_url + "/establecimientos/getby", {lat: pos.lat, lng: pos.lng, distanciaKM: distanciaKM,regimen:regimen}, function (data) {
         //foreach obj"i" in json
         $.each(data, function (i) {
             //pinIcon = new google.maps.MarkerImage(img_url + data[i].categoria.descripcion + '.png', null, null, null, new google.maps.Size(60, 60));
@@ -50,7 +50,12 @@ function loadMarks(pos) {
             marker = new google.maps.Marker({position: lugar, title: data[i].nombre});//marcador
             marker.setMap(map);//insertar marcador al mapa
             markers.push(marker);
-            content = "<h5>" + data[i].nombre + "</h5><p>" + data[i].regimen + "</p>";//texto al hacer clic
+            content = "<h5>" + data[i].nombre + "</h5>\n\
+                       <p>Regimen: " + data[i].regimen + "</p>\n\
+                       <p>Departamento: " + data[i].departamento + "</p>\n\
+                       <p>Localidad: " + data[i].localidad + "</p>\n\
+                       <p>Jurisdicción: " + data[i].jurisdiccion +"</p>";
+            //texto al hacer clic
             infowindow = new google.maps.InfoWindow({content: content});//insertar texto
             //evento on click mostrar contenido de marca "para cada marca"
             google.maps.event.addListener(marker, 'click', (function (marker, content, infowindow) {

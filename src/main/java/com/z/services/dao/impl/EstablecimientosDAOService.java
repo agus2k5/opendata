@@ -7,7 +7,9 @@ package com.z.services.dao.impl;
 
 import com.z.models.Establecimientos;
 import com.z.services.dao.EstablecimientosDAO;
+import java.util.Date;
 import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,5 +39,14 @@ public class EstablecimientosDAOService implements EstablecimientosDAO{
     @Override
     public Establecimientos get(String id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Establecimientos> listByRegimen(String regimen) {
+        String hqlQuery = "FROM Establecimientos WHERE regimen=:regimen";
+        Query query = sessionFactory.getCurrentSession().createQuery(hqlQuery);
+        query.setParameter("regimen", regimen);
+        return query.list();
     }
 }

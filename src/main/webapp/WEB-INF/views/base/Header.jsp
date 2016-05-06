@@ -13,7 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-        <title>Asdqwezxc</title>
+        <title>Open Data Gov</title>
         <!-- CSS  -->
         <spring:url value="/resources/font-awesome/css/font-awesome.css" var="fontAwesomeCss"/>
         <link rel="stylesheet" type="text/css" href="${fontAwesomeCss}" />

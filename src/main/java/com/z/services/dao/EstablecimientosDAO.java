@@ -13,7 +13,8 @@ import java.util.List;
  * @author Mariano
  */
 public interface EstablecimientosDAO {
-     public void add(Establecimientos establecimiento);
+    public void add(Establecimientos establecimiento);
     public List<Establecimientos> list();
     public Establecimientos get(String id);
+    public List<Establecimientos> listByRegimen(String regimen);
 }
