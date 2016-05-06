@@ -41,10 +41,10 @@ $(function(){
 <div id="asd"><h1> </div>
 
 
-<!--<div>
+<!--<<div>
 <button id="botonlogin" onclick="Login()" >Logearse con Facebook</button>
 <button id="botonlogin" onclick="Logout()" >Cerrar sesion</button>
-</div>
+</div>-->
 
 
 <div class="row">
