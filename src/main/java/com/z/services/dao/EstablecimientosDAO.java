@@ -16,6 +16,8 @@ import java.util.List;
 public interface EstablecimientosDAO {
     public void add(Establecimientos establecimiento);
     public List<Establecimientos> list();
+    public List<Establecimientos> listByLocalidadAndDepartamento(String localidad,String departamento);
+    public List<Establecimientos> listByLocalidadAndDepartamento(String localidad,String departamento,String regimen);
     public Establecimientos get(int cueanexo);
     public List<Establecimientos> listByRegimen(String regimen);
     public List<Curso> getCursosByCueAnexo(int cueanexo);

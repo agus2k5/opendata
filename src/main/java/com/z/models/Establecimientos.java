@@ -8,6 +8,10 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 @Entity
 @Table(name="establecimientos")
 public class Establecimientos implements Serializable {
@@ -36,8 +40,10 @@ public class Establecimientos implements Serializable {
 	@Column(name="Jurisdiccion",length =100,nullable = true)
 	private String Jurisdiccion;
         
-        @JsonIgnore
-        @OneToMany(mappedBy="establecimiento",fetch = FetchType.LAZY)
+        //@JsonIgnore
+        @OneToMany(mappedBy="establecimiento")
+        @Fetch(org.hibernate.annotations.FetchMode.JOIN)
+        //@BatchSize(size = 100)
         private List<Curso> cursos;
 
 	public Establecimientos(){}

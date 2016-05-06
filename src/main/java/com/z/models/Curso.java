@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.Fetch;
 
 /**
  *
@@ -52,7 +53,8 @@ public class Curso implements Serializable {
     private String modalidad;
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(org.hibernate.annotations.FetchMode.JOIN)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CueAnexo")
     private Establecimientos establecimiento;
 

@@ -46,15 +46,37 @@ public class HomeController {
     public @ResponseBody List<Establecimientos> getEst(){
         return establecimientosDAO.list();
     }
-    @RequestMapping(value = "establecimientos/get/{cueanexo}",method = RequestMethod.GET)
+    @RequestMapping(value = "establecimientos/getByLocDep/{localidad}/{departamento}",method = RequestMethod.GET)
+    public @ResponseBody List<Establecimientos> getEstbylocdep(
+            @PathVariable("localidad") String localidad,
+            @PathVariable("departamento") String departamento){
+        return establecimientosDAO.listByLocalidadAndDepartamento(localidad, departamento);
+    }
+    @RequestMapping(value = "establecimientos/getByLocDep/{localidad}/{departamento}/{lat}/{lng}/{distanciaKM}/{regimen}",method = RequestMethod.GET)
+    public @ResponseBody List<Establecimientos> getEstbylocdep(
+            @PathVariable("localidad") String localidad,
+            @PathVariable("departamento") String departamento,
+            @PathVariable("lat") String lat,
+            @PathVariable("lng") String lng,
+            @PathVariable("distanciaKM") double distanciaKM,
+            @PathVariable("regimen") String regimen){
+        Criteria criteria = new CriteriaDistance(Float.parseFloat(lat), Float.parseFloat(lng), distanciaKM);
+        if(regimen.equals("Todos")){
+            return criteria.meetCriteria(establecimientosDAO.listByLocalidadAndDepartamento(localidad, departamento));
+        }else{
+            return criteria.meetCriteria(establecimientosDAO.listByLocalidadAndDepartamento(localidad, departamento,regimen));
+        }
+        
+    }
+    @RequestMapping(value = "establecimientos/getByCueAnexo/{cueanexo}",method = RequestMethod.GET)
     public @ResponseBody Establecimientos getEstablecimiento(@PathVariable("cueanexo") int cueanexo){
         return establecimientosDAO.get(cueanexo);
     }
-    @RequestMapping(value = "establecimientos/getCursos/{cueanexo}",method = RequestMethod.GET)
+    @RequestMapping(value = "establecimientos/getCursosByCueAnexo/{cueanexo}",method = RequestMethod.GET)
     public @ResponseBody List<Curso> getEstablecimientoCursos(@PathVariable("cueanexo") int cueanexo){
         return establecimientosDAO.getCursosByCueAnexo(cueanexo);
     }
-    @RequestMapping(value = "establecimientos/getby",method = RequestMethod.GET)
+    /*@RequestMapping(value = "establecimientos/getby",method = RequestMethod.GET)
     public @ResponseBody List<Establecimientos> getEstablecimientos(
             @RequestParam (value="lat",required = true) final String lat,
             @RequestParam (value="lng",required = true) final String lng,
@@ -86,5 +108,5 @@ public class HomeController {
             if(!flag){cur.add(curso);}
         }
         return cur;
-    }
+    }*/
 }
