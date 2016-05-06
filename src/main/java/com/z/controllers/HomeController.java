@@ -79,6 +79,7 @@ public class HomeController {
      @RequestMapping(value = "establecimientos/comentatios/{cueanexo}",method = RequestMethod.GET)
     public  ModelAndView comentarios(@PathVariable("cueanexo") int cueanexo){
         ModelAndView mav = new ModelAndView("comentarios");
+        mav.addObject("cuanexo", cueanexo);
         return mav;
     }
     /*@RequestMapping(value = "establecimientos/getby",method = RequestMethod.GET)
