@@ -26,11 +26,9 @@ function addLocation(location) {
     drawCircle(marker);
 }
 function drawCircle(center_marker) {
-    var correccion = 100;
+    var correccion = 350;
     var radioMetros = Number(distanciaKM) * 1000;
-    if (radioMetros <= 0) {
-        radioMetros = 1000;
-    }
+    if (radioMetros <= 0) {radioMetros = 1000;}
     // Add circle overlay and bind to marker
     circle = new google.maps.Circle({
         map: map,

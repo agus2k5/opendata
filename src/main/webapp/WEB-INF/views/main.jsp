@@ -11,6 +11,9 @@
 <script src="http://maps.googleapis.com/maps/api/js"></script>
 <script src="${GmapJs}"></script>
 <script type="text/javascript">
+    $(function () {
+        $('select').material_select();
+    });
     function changeRadio() {
         distanciaKM = $("#radio_search").val();
         deleteAllMarksAndCircle();
@@ -19,6 +22,17 @@
 </script>
 
 <div class="main">
+    <div class="row">
+        <div class="input-field col s6">
+            <select multiple>
+                <option value="" disabled selected>Choose your option</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+            </select>
+            <label>Materialize Multiple Select</label>
+        </div>
+    </div>
     <div class="col s6">
         <div class="col s3" style="position: absolute;top: 80px;margin-left: 30px;z-index:5;">
             <form action="#">
@@ -27,11 +41,6 @@
                 </p>
             </form>
         </div>
-        <!--<div class="col s3" style="position: absolute;top: 140px;left: 30%;z-index:5;">
-            <button style="margin-top: 30px;" class="btn waves-effect waves-light indigo" id="btn_enviar">
-                <i class="material-icons right">search</i>
-            </button>
-        </div>-->
         <div class="col s12">
             <div class="table-responsive" style="overflow:auto; overflow-y:hidden; margin: 0 auto; withe-space: nowrap">
                 <div id="googleMap" class="col s12"style="width:1300px;height:550px;margin-top: 10px;margin-bottom: 10px;margin-left: 15px;margin-right: 25px;"></div>
