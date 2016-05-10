@@ -11,7 +11,7 @@
     var distanciaKM = '${distanciaKM}';
     var regimen = 'Todos';
 </script><!--global para Gmap.js-->
-<!-- pablito aca le agregué mi api key de google maps-->
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpyV_k60tNrlHZViDcw6GuSPmd9VFBl7A&libraries=places"></script>
 
 <script src="${GmapJs}"></script>

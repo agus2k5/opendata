@@ -76,7 +76,7 @@ public class HomeController {
     public @ResponseBody List<Curso> getEstablecimientoCursos(@PathVariable("cueanexo") int cueanexo){
         return establecimientosDAO.getCursosByCueAnexo(cueanexo);
     }
-     @RequestMapping(value = "establecimientos/comentatios/{cueanexo}",method = RequestMethod.GET)
+     @RequestMapping(value = "establecimientos/comentarios/{cueanexo}",method = RequestMethod.GET)
     public  ModelAndView comentarios(@PathVariable("cueanexo") int cueanexo){
         ModelAndView mav = new ModelAndView("comentarios");
         mav.addObject("cuanexo", cueanexo);

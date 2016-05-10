@@ -128,7 +128,7 @@ function loadMarks(pos, flag) {
                        <p>Localidad: " + data[i].localidad + "</p>\n\
                        <p>Jurisdicción: " + data[i].jurisdiccion + "</p>\n\
                        <p>Cursos:" + data[i].cursos + "</p>\n\
-                       <a target="+"_blank"+" href=http://localhost:8080/openData/establecimientos/comentatios/" + data[i].cueAnexo + "> Comentar </a>";
+                       <a target="+"_blank"+" href=./establecimientos/comentarios/" + data[i].cueAnexo + "> Comentar </a>";
                 //texto al hacer clic
                 infowindow = new google.maps.InfoWindow({content: content});//insertar texto
                 //evento on click mostrar contenido de marca "para cada marca"

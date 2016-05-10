@@ -1,6 +1,10 @@
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="base_url" value="${pageContext.request.contextPath}"/>
+<script type="text/javascript">
+    var base_url = '${base_url}';
+</script>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <jsp:include page="base/Header.jsp"/>
 <c:set var="base_url" value="${pageContext.request.contextPath}"/>
@@ -17,7 +21,7 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 <script>
 $(function(){
-            $.get("http://localhost:8080/openData/establecimientos/getByCueAnexo/"+${cuanexo},function(data){
+            $.get(base_url +"/establecimientos/getByCueAnexo/"+${cuanexo},function(data){
                 //alert(JSON.stringify(data));
                 $("#datoescuela").html("<div>\n\
         <h4>" + data.localidad + "  "+ data.departamento +"</h4>\n\
