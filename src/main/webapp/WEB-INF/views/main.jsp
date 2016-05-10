@@ -11,7 +11,9 @@
     var distanciaKM = '${distanciaKM}';
     var regimen = 'Todos';
 </script><!--global para Gmap.js-->
-<script src="http://maps.googleapis.com/maps/api/js"></script>
+<!-- pablito aca le agregué mi api key de google maps-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpyV_k60tNrlHZViDcw6GuSPmd9VFBl7A&libraries=places"></script>
+
 <script src="${GmapJs}"></script>
 <script type="text/javascript">
     $(function () {
@@ -21,6 +23,7 @@
         distanciaKM = $("#radio_search").val();
         regimen = $("#regimen option:selected").text();
         deleteAllMarksAndCircle();
+        deleteHospitals();
         getLocationAndLoadMarks();
     }
 </script>
