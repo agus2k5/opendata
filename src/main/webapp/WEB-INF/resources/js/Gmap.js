@@ -2,8 +2,14 @@ var pos = {lat: -27.477900, lng: -58.819607};//centro de corrientes
 var lugar = new google.maps.LatLng(pos.lat, pos.lng);
 var map, marker, circle, geocoder;
 var markers = [];
-var hospitals = [];
+var hospitals =[];
+var firedept =[];
+var  police = [];
 var flag_submit = false;
+var idlocation;
+
+
+
 function initialize() {
     var mapProp = {
         center: lugar,
@@ -44,12 +50,14 @@ function drawCircle(center_marker) {
     //console.log(circle.getBounds().toJSON());
 }
 //pablito aca empieza mi codigo de google places
-function loadHospitals(pos, radio){
+function loadHospitals(pos, radio,location){
    //configuracion oara traer hospitales elementos cercanos
+   //var  places= "park|police|grocery_or_supermarket";
+   //var place= location;
    var request = {
     location: pos,
     radius: radio,
-    types: ['hospital']
+    types: [location]
   };
 
   service = new google.maps.places.PlacesService(map);
@@ -61,14 +69,37 @@ function callback(results, status) {
     for (var i = 0; i < results.length; i++) {
       var place = results[i];
       var placeLoc = place.geometry.location;
+      
+      if (idlocation==1){      
       var hospital = new google.maps.MarkerImage(img_url + 'Hospital.png', null, null, null, new google.maps.Size(40, 40));
       var marker = new google.maps.Marker({
         map: map,
         position: place.geometry.location,
         icon: hospital
   });
-    hospitals[i] = marker;
-  
+        hospitals[i] = marker;}
+    
+    else if (idlocation==2){      
+      var policia = new google.maps.MarkerImage(img_url + 'police.png', null, null, null, new google.maps.Size(40, 40));
+      var marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location,
+        icon: policia
+  });
+                police[i] = marker;}
+
+
+    else if (idlocation==3){      
+      var bombero = new google.maps.MarkerImage(img_url + 'fire_station.png', null, null, null, new google.maps.Size(40, 40));
+      var marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location,
+        icon: bombero
+  });
+                firedept[i] = marker;}
+            
+            
+            
     content = place.name;
   //texto al hacer clic
     infowindow = new google.maps.InfoWindow({content: content});//insertar texto
@@ -84,11 +115,7 @@ function callback(results, status) {
   }
 }
 
-function deleteHospitals(){
-    for(i=0; i<hospitals.length; i++){
-        hospitals[i].setMap(null);
-    }
-}
+
 //pablito aca termina mi codigo de google places
 function loadMarks(pos, flag) {
     var marker, infowindow, content, pinIcon, localidad, departamento;//variables a utilizar
@@ -110,8 +137,9 @@ function loadMarks(pos, flag) {
         //$.get(base_url + "/establecimientos/getby", {lat: pos.lat, lng: pos.lng, distanciaKM: distanciaKM,regimen:regimen}, function (data) {
         //establecimientos/getByLocDep/{localidad}/{departamento}/{lat}/{lng}/{distanciaKM}/{regimen}
         $.get(base_url + "/establecimientos/getByLocDep/" + localidad + "/" + departamento + "/" + pos.lat + "/" + pos.lng + "/" + distanciaKM + "/" + regimen, {}, function (data) {
-            deleteHospitals();
-            loadHospitals(pos, distanciaKM * 1000);
+            //deleteHospitals();
+            
+           // loadHospitals(pos, distanciaKM * 1000);
             //foreach obj"i" in json
             $.each(data, function (i) {
                 //pablito aca recibo la posicion y multiplico por mil porq esta en km
@@ -138,8 +166,11 @@ function loadMarks(pos, flag) {
                         infowindow.open(map, marker);
                     };
                 })(marker, content, infowindow));
-            });
-        });
+            });//end each
+        }).done(function() {
+          //  alert( "second success" );
+           // hospitales($("#hospitalschk"));
+          });
     });
 }
 function deleteAllMarksAndCircle() {
@@ -190,3 +221,70 @@ $(function () {
         });
     });
 });
+
+
+function hospitales(checkbox,id){
+    if (checkbox.checked){
+       // alert(($("#hospitalschk").is(':checked')));
+        
+        if (id===1){
+        
+        deleteHospitals();
+        loadHospitals(pos, distanciaKM * 1000,"hospital");
+        idlocation=1;
+        }
+        if (id===2){
+            deletepolice();
+        loadHospitals(pos, distanciaKM * 1000,"police");
+        idlocation=2;
+        }
+        if (id===3){
+            deletefiredept();
+        loadHospitals(pos, distanciaKM * 1000,"fire_station");
+        idlocation=3;
+        }
+    }else{if (id===1){
+        
+        deleteHospitals();
+        
+        }
+        if (id===2){
+            deletepolice();
+        
+        }
+        if (id===3){
+            deletefiredept();
+        
+        }
+        
+    }    
+
+};
+
+
+
+
+
+function borrarplaces (){
+    deleteHospitals();
+    deletepolice();
+    deletefiredept();
+}
+
+function deleteHospitals(){
+    for(i=0; i<hospitals.length; i++){
+        hospitals[i].setMap(null);
+    }
+}
+
+function deletepolice(){
+    for(i=0; i<police.length; i++){
+        police[i].setMap(null);
+    }
+}
+
+function deletefiredept(){
+    for(i=0; i<firedept.length; i++){
+        firedept[i].setMap(null);
+    }
+}

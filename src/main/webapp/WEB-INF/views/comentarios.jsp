@@ -24,11 +24,11 @@ $(function(){
             $.get(base_url +"/establecimientos/getByCueAnexo/"+${cuanexo},function(data){
                 //alert(JSON.stringify(data));
                 $("#datoescuela").html("<div>\n\
-        <h4>" + data.localidad + "  "+ data.departamento +"</h4>\n\
+        <h5>" + data.localidad + "  "+ data.departamento +"</h5>\n\
                       <h5> Regimen: " + data.regimen + "</h5>\n\
                 <h5> Jurisdiccion:  " + data.jurisdiccion + "</h5></div>");
                     
-                  $("#nombre").html("<h3>" + data.nombre+ "</h3>");
+                  $("#nombre").html("<h4>" + data.nombre+ "</h4>");
                  
                 
             });

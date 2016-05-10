@@ -24,8 +24,18 @@
         regimen = $("#regimen option:selected").text();
         deleteAllMarksAndCircle();
         deleteHospitals();
+        borrarplaces();
         getLocationAndLoadMarks();
-    }
+       // hospitales($("#hospitalschk"),1);        
+        $("#hospitalschk").prop("checked", false);
+         $("#policechk").prop("checked", false);
+          $("#bomberosschk").prop("checked", false);
+
+    
+};
+    
+
+    
 </script>
 
 <div class="main">
@@ -46,7 +56,40 @@
         <div  class="input-field col s3">
             <button class="btn waves-effect waves-light indigo" id="submit">Submit<i class="material-icons right">send</i></button>
         </div>
+        <div class="input-field col s3">
+              <!-- Switch -->
+  <div class="switch">
+    <label>
+      hospitales
+      <input id="hospitalschk" type="checkbox" onclick="hospitales(this,1)" autocomplete="off">
+      <span class="lever"></span>
+      On
+    </label>
+  </div><br/>
+        </div>
+         <div class="input-field col s3">
+  <div class="switch">
+    <label>
+      comisarias
+      <input id="policechk" type="checkbox" onclick="hospitales(this,2)" autocomplete="off">
+      <span class="lever"></span>
+      On
+    </label>
+  </div><br />
+       </div>  
+         <div class="input-field col s3">
+  <div class="switch">
+    <label>
+      bomberos
+      <input id="bomberosschk" type="checkbox" onclick="hospitales(this,3)" autocomplete="off">
+      <span class="lever"></span>
+      On
+    </label>
+  </div>            
+            
         
+        
+        </div>    
     </div>
     <div class="col s6">
         <div class="col s3" style="position: absolute;top: 160px;margin-left: 30px;z-index:5;">
