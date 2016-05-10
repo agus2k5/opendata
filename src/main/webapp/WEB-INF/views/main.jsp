@@ -56,34 +56,34 @@
         <div  class="input-field col s3">
             <button class="btn waves-effect waves-light indigo" id="submit">Submit<i class="material-icons right">send</i></button>
         </div>
-        <div class="input-field col s3">
+ <div class="input-field col s3">
               <!-- Switch -->
-  <div class="switch">
+  <div class="switch" style="margin-bottom: 10px;">
     <label>
-      hospitales
-      <input id="hospitalschk" type="checkbox" onclick="hospitales(this,1)" autocomplete="off">
+      Hospitales  &nbsp; &nbsp;
+      <input id="hospitalschk" type="checkbox" onclick="hospitales(this,1)" autocomplete="off" style="margin-right: 5px;">
       <span class="lever"></span>
-      On
+      
     </label>
-  </div><br/>
+  </div>
         </div>
          <div class="input-field col s3">
-  <div class="switch">
+  <div class="switch" style="margin-bottom: 10px;">
     <label>
-      comisarias
+      Comisarias  &nbsp;
       <input id="policechk" type="checkbox" onclick="hospitales(this,2)" autocomplete="off">
       <span class="lever"></span>
-      On
+      
     </label>
-  </div><br />
+  </div>
        </div>  
          <div class="input-field col s3">
-  <div class="switch">
+  <div class="switch" style="margin-bottom: 10px;">
     <label>
-      bomberos
+      Bomberos &nbsp;  &nbsp;
       <input id="bomberosschk" type="checkbox" onclick="hospitales(this,3)" autocomplete="off">
       <span class="lever"></span>
-      On
+      
     </label>
   </div>            
             
