@@ -57,7 +57,7 @@ function drawCircle(center_marker) {
     circle.bindTo('center', center_marker, 'position');
     //console.log(circle.getBounds().toJSON());
 }
-
+//pablito aca empieza mi codigo de google places
 function loadHospitals(pos, radio,location){
    //configuracion oara traer hospitales elementos cercanos
    //var  places= "park|police|grocery_or_supermarket";
@@ -146,7 +146,7 @@ function loadMarks(pos, flag) {
         //establecimientos/getByLocDep/{localidad}/{departamento}/{lat}/{lng}/{distanciaKM}/{regimen}
         $.get(base_url + "/establecimientos/getByLocDep/" + localidad + "/" + departamento + "/" + pos.lat + "/" + pos.lng + "/" + distanciaKM + "/" + regimen, {}, function (data) {
             //deleteHospitals();
-            
+            drawChart(localidad,departamento,pos.lat,pos.lng,distanciaKM,regimen);
            // loadHospitals(pos, distanciaKM * 1000);
             //foreach obj"i" in json
             $.each(data, function (i) {
@@ -178,7 +178,6 @@ function loadMarks(pos, flag) {
                 //aca carga el heatmap
                
                 pointArray.push(new google.maps.LatLng(data[i].latitud, data[i].longitud));
-                
             });//end each
         }).done(function() {
           //  alert( "second success" );
@@ -192,6 +191,7 @@ function deleteAllMarksAndCircle() {
     }
     circle.setMap(null);
     pointArray.clear();
+    borrarplaces();
 }
 function success(position) {
     pos = {lat: position.coords.latitude, lng: position.coords.longitude};
@@ -278,11 +278,18 @@ function hospitales(checkbox,id){
 
 
 
-
 function borrarplaces (){
+    //alert('asd');
     deleteHospitals();
     deletepolice();
     deletefiredept();
+    $("#hospitalschk").prop("checked", false);
+        $("#policechk").prop("checked", false);
+        $("#bomberosschk").prop("checked", false);
+        $("#heatschk").prop("checked", false);
+        $("#markersschk").prop("checked", false);
+        heatmap.setMap(null);
+        pointArray.clear();
 }
 
 function deleteHospitals(){
@@ -311,34 +318,34 @@ function toggleHeatmap() {
   
  
 }
+//eso no uso
+//function changeGradient() {
+//  var gradient = [
+//    'rgba(0, 255, 255, 0)',
+//    'rgba(0, 255, 255, 1)',
+//    'rgba(0, 191, 255, 1)',
+//    'rgba(0, 127, 255, 1)',
+//    'rgba(0, 63, 255, 1)',
+//    'rgba(0, 0, 255, 1)',
+//    'rgba(0, 0, 223, 1)',
+//    'rgba(0, 0, 191, 1)',
+//    'rgba(0, 0, 159, 1)',
+//    'rgba(0, 0, 127, 1)',
+//    'rgba(63, 0, 91, 1)',
+//    'rgba(127, 0, 63, 1)',
+//    'rgba(191, 0, 31, 1)',
+//    'rgba(255, 0, 0, 1)'
+//  ]
+//  heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+//}
 
-function changeGradient() {
-  var gradient = [
-    'rgba(0, 255, 255, 0)',
-    'rgba(0, 255, 255, 1)',
-    'rgba(0, 191, 255, 1)',
-    'rgba(0, 127, 255, 1)',
-    'rgba(0, 63, 255, 1)',
-    'rgba(0, 0, 255, 1)',
-    'rgba(0, 0, 223, 1)',
-    'rgba(0, 0, 191, 1)',
-    'rgba(0, 0, 159, 1)',
-    'rgba(0, 0, 127, 1)',
-    'rgba(63, 0, 91, 1)',
-    'rgba(127, 0, 63, 1)',
-    'rgba(191, 0, 31, 1)',
-    'rgba(255, 0, 0, 1)'
-  ]
-  heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
-}
+//function changeRadius() {
+//  heatmap.set('radius', heatmap.get('radius') ? null : 20);
+//}
 
-function changeRadius() {
-  heatmap.set('radius', heatmap.get('radius') ? null : 20);
-}
-
-function changeOpacity() {
-  heatmap.set('opacity', heatmap.get('opacity') ? 0.2 : 0.2);
-}
+//function changeOpacity() {
+//  heatmap.set('opacity', heatmap.get('opacity') ? 0.2 : 0.2);
+//}
 
 
 function toggleMarkers() {

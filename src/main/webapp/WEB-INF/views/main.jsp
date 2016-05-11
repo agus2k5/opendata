@@ -11,33 +11,9 @@
     var distanciaKM = '${distanciaKM}';
     var regimen = 'Todos';
 </script><!--global para Gmap.js-->
-<style>#floating-panel {
-        position: absolute;
-        top: 10px;
-        left: 25%;
-        z-index: 5;
-        background-color: #fff;
-        padding: 5px;
-        border: 1px solid #999;
-        text-align: center;
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
-      #floating-panel {
-        background-color: #fff;
-        border: 1px solid #999;
-        left: 25%;
-        padding: 5px;
-        position: absolute;
-        top: 10px;
-        z-index: 5;
-      }
-    </style>
+
     
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpyV_k60tNrlHZViDcw6GuSPmd9VFBl7A&libraries=places,visualization"></script>
-<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpyV_k60tNrlHZViDcw6GuSPmd9VFBl7A&libraries=visualization">-->
-
 
 <script src="${GmapJs}"></script>
 <script> $('.dropdown-button').dropdown({
@@ -62,13 +38,19 @@
         regimen = $("#regimen option:selected").text();
         deleteAllMarksAndCircle();
         deleteHospitals();
-        borrarplaces();
+        //borrarplaces();
+         deleteHospitals();
+    deletepolice();
+    deletefiredept();
+    $("#hospitalschk").prop("checked", false);
+        $("#policechk").prop("checked", false);
+        $("#bomberosschk").prop("checked", false);
+        $("#heatschk").prop("checked", false);
+        $("#markersschk").prop("checked", false);
+        pointArray.clear();
         getLocationAndLoadMarks();
        // hospitales($("#hospitalschk"),1);        
-        $("#hospitalschk").prop("checked", false);
-         $("#policechk").prop("checked", false);
-          $("#bomberosschk").prop("checked", false);
-
+        
     
 };
     
@@ -147,7 +129,7 @@
   <div class="switch" >
     <label style="position: relative; margin: auto;color: black">
       Comisarias  
-      <input id="policechk" type="checkbox" onclick="hospitales(this,2)" autocomplete="off"><td/>
+      <input id="policechk" type="checkbox" onclick="hospitales(this,2)" autocomplete="off">
       <span class="lever"></span>
       
     </label>
@@ -161,10 +143,9 @@
       <input id="bomberosschk" type="checkbox" onclick="hospitales(this,3)" autocomplete="off">
       <span class="lever"></span>
       
-    </label></div>
+    </label>
      </li>
-     
-     <li class="divider"></li>
+       <li class="divider"></li>
     <li>
   <div class="switch" style="margin-bottom: 10px;">
     <label style="position: relative; margin: auto;color: black">
@@ -176,7 +157,7 @@
      </li>
      
      <li class="divider"></li>
-<!--    <li>
+<!--         <li>
   <div class="switch" style="margin-bottom: 10px;">
     <label style="position: relative; margin: auto;color: black">
       Marcadores 
@@ -187,7 +168,7 @@
      </li>-->
   </ul>
 </div>     
-<!--          mapa de calor  -->
+            
             
         
 <!--        </div>    -->
@@ -206,5 +187,6 @@
             </div>  
         </div>
     </div>
+    <div id="chart_div" align="center"></div>
 </div>
 <jsp:include page="base/Footer.jsp"/>

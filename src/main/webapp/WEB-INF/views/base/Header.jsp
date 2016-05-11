@@ -27,6 +27,11 @@
         <script src="${jqueryJs}"></script>
         <spring:url value="/resources/materialize/js/materialize.js" var="materializeJs" />
         <script src="${materializeJs}"></script>
+        <!-- Google Charts -->
+        <spring:url value="https://www.gstatic.com/charts/loader.js" var="loaderJs"/>
+        <script src="${loaderJs}"></script>
+        <spring:url value="/resources/js/charts.js" var="chartsJs" />
+        <script src="${chartsJs}"></script>
         <!-- DATA TABLE SCRIPTS -->
         <spring:url value="/resources/js/jquery.dataTables.js" var="dataTablesJs" />
         <spring:url value="/resources/css/jquery.dataTables.css" var="dataTablesCss" />
@@ -34,11 +39,11 @@
         <script src="${dataTablesJs}"></script>
         <link rel="stylesheet" type="text/css" href="${dataTablesCss}">
         <link rel="stylesheet" type="text/css" href="${dataTablesCssB}">
-        <style type="text/css">nav ul a, nav .brand-logo  {color: #FFFFFF;}</style>
+        <style type="text/css">nav ul a, nav .brand-logo {color: #FFFFFF;}</style>
     <nav class="indigo" role="navigation">
         <div class="nav-wrapper">
             <spring:url value="/resources/img/hackathon-logo.svg" var="logo" />
-            <a href="${base_url}"><img id="logo-container" class="brand-logo" style="height: 64px;" src="${logo}"></img></a>
+            <a href="${base_url}"><img id="logo-container" class="brand-logo" style="height: 64px; -webkit-filter: invert(1);" src="${logo}"></img></a>
             <!--
             <ul class="right hide-on-med-and-down">
                 <li><a class="white-text ${typography}" href="">1</a></li>
