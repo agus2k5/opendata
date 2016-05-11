@@ -27,7 +27,7 @@ function initialize() {
      heatmap = new google.maps.visualization.HeatmapLayer({
     data: pointArray,
     map: map,
-    radius:30
+    radius:25
       });
     heatmap.setMap(null);
 }
@@ -176,8 +176,11 @@ function loadMarks(pos, flag) {
                 })(marker, content, infowindow));
                 
                 //aca carga el heatmap
-               
-                pointArray.push(new google.maps.LatLng(data[i].latitud, data[i].longitud));
+               if (data[i].regimen=="Publico"){
+                pointArray.push({location: new google.maps.LatLng(data[i].latitud, data[i].longitud),weight:5});
+            }else 
+            {pointArray.push({location: new google.maps.LatLng(data[i].latitud, data[i].longitud),weight:1});
+            }
             });//end each
         }).done(function() {
           //  alert( "second success" );
