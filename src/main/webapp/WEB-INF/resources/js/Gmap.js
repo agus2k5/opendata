@@ -138,7 +138,7 @@ function loadMarks(pos, flag) {
         //establecimientos/getByLocDep/{localidad}/{departamento}/{lat}/{lng}/{distanciaKM}/{regimen}
         $.get(base_url + "/establecimientos/getByLocDep/" + localidad + "/" + departamento + "/" + pos.lat + "/" + pos.lng + "/" + distanciaKM + "/" + regimen, {}, function (data) {
             //deleteHospitals();
-            
+            drawChart(localidad,departamento,pos.lat,pos.lng,distanciaKM,regimen);
            // loadHospitals(pos, distanciaKM * 1000);
             //foreach obj"i" in json
             $.each(data, function (i) {

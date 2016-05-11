@@ -11,6 +11,7 @@ import com.z.models.Curso;
 import com.z.models.Establecimientos;
 import com.z.services.dao.EstablecimientosDAO;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -81,6 +82,33 @@ public class HomeController {
         ModelAndView mav = new ModelAndView("comentarios");
         mav.addObject("cuanexo", cueanexo);
         return mav;
+    }
+    @RequestMapping(value = "establecimientos/Count/{localidad}/{departamento}/{lat}/{lng}/{distanciaKM}/{regimen}",method = RequestMethod.GET)
+    public @ResponseBody HashMap<String,Integer> getEstbylocdepCount(
+            @PathVariable("localidad") String localidad,
+            @PathVariable("departamento") String departamento,
+            @PathVariable("lat") String lat,
+            @PathVariable("lng") String lng,
+            @PathVariable("distanciaKM") double distanciaKM,
+            @PathVariable("regimen") String regimen){
+        Criteria criteria = new CriteriaDistance(Float.parseFloat(lat), Float.parseFloat(lng), distanciaKM);
+        List<Establecimientos> establecimientos;
+        if(regimen.equals("Todos")){
+            establecimientos= criteria.meetCriteria(establecimientosDAO.listByLocalidadAndDepartamento(localidad, departamento));
+        }else{
+            establecimientos = criteria.meetCriteria(establecimientosDAO.listByLocalidadAndDepartamento(localidad, departamento,regimen));
+        }
+        HashMap<String,Integer> regimens = new HashMap();
+        regimens.put("Publico", 0);
+        regimens.put("Privado Subvencionado", 0);
+        regimens.put("Privado No Subvencionado", 0);
+        for (Establecimientos establecimiento : establecimientos) {
+            if(regimens.containsKey(establecimiento.getRegimen())){
+                regimens.put(establecimiento.getRegimen(), regimens.get(establecimiento.getRegimen())+1);
+            }
+        }
+        regimens.put("Total", establecimientos.size());
+        return regimens;
     }
     /*@RequestMapping(value = "establecimientos/getby",method = RequestMethod.GET)
     public @ResponseBody List<Establecimientos> getEstablecimientos(

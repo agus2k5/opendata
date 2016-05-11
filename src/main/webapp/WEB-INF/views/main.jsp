@@ -160,5 +160,6 @@
             </div>  
         </div>
     </div>
+    <div id="chart_div" align="center"></div>
 </div>
 <jsp:include page="base/Footer.jsp"/>
