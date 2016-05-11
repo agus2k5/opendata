@@ -12,9 +12,23 @@
     var regimen = 'Todos';
 </script><!--global para Gmap.js-->
 
+    
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpyV_k60tNrlHZViDcw6GuSPmd9VFBl7A&libraries=places"></script>
 
 <script src="${GmapJs}"></script>
+<script> $('.dropdown-button').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrain_width: true, // Does not change width of dropdown to that of the activator
+      hover: true, // Activate on hover
+      gutter: 0, // Spacing from edge
+      belowOrigin: true, // Displays dropdown below the button
+      alignment: 'left' // Displays dropdown with edge aligned to the left of button
+     
+    }
+  );</script> 
+    
+    
 <script type="text/javascript">
     $(function () {
         $('select').material_select();
@@ -56,8 +70,8 @@
         <div  class="input-field col s3">
             <button class="btn waves-effect waves-light indigo" id="submit">Submit<i class="material-icons right">send</i></button>
         </div>
- <div class="input-field col s3">
-              <!-- Switch -->
+<!-- <div class="input-field col s3">
+               Switch 
   <div class="switch" style="margin-bottom: 10px;">
     <label>
       Hospitales  &nbsp; &nbsp;
@@ -86,10 +100,51 @@
       
     </label>
   </div>            
+            -->
+<!--        <div class="input-field col s3">-->
+            
+            <a class='dropdown-button btn' style=" background-color:#3f51b5; vertical-align: middle; position: relative;margin-top: 15px;"constrainwidth='false' data-beloworigin="true" href='#' data-activates='dropdown1'>Lugares</a>
+
+  <!-- Dropdown Structure -->
+  <ul id='dropdown1' class='dropdown-content' style="width: 30px;color: black;font-size: 20px">
+    <li>
+<!--               Switch -->
+  <div class="switch" >
+      <label class="drops" style="position: relative; margin: auto;color: black">
+      Hospitales  
+      <input id="hospitalschk" type="checkbox" onclick="hospitales(this,1)" autocomplete="off" >
+      <span class="lever"></span>
+      
+    </label>
+  </div>
+        </li>
+         <li class="divider"></li>
+    <li>
+  <div class="switch" >
+    <label style="position: relative; margin: auto;color: black">
+      Comisarias  
+      <input id="policechk" type="checkbox" onclick="hospitales(this,2)" autocomplete="off">
+      <span class="lever"></span>
+      
+    </label>
+  </div>
+         </li>
+    <li class="divider"></li>
+    <li>
+  <div class="switch" style="margin-bottom: 10px;">
+    <label style="position: relative; margin: auto;color: black">
+      Bomberos 
+      <input id="bomberosschk" type="checkbox" onclick="hospitales(this,3)" autocomplete="off">
+      <span class="lever"></span>
+      
+    </label>
+     </li>
+  </ul>
+</div>     
+            
             
         
-        
-        </div>    
+<!--        </div>    -->
     </div>
     <div class="col s6">
         <div class="col s3" style="position: absolute;top: 160px;margin-left: 30px;z-index:5;">
